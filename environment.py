@@ -138,7 +138,8 @@ class CommEnvironment:
             jammer_pos = self.jammer[0]
 
             # Giải mã hành động
-            pga_choice = self.pga_gain if action[0] > 0 else 0  # Gửi bit '1' hay '0'
+            #pga_choice = self.pga_gain if action[0] > 0 else 0  # Gửi bit '1' hay '0'
+            pga_choice = ((action[0] + 1) / 2) * self.pga_gain  # Chuẩn hóa từ [0,1] sang [0, pga_gain]
             mode_choice = 'relay' if action[1] > 0 else 'd2d'
             
             # Track energy consumption
