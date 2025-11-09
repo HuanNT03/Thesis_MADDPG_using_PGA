@@ -317,6 +317,7 @@ if __name__ == "__main__":
     for episode in range(NUM_EPISODES):
         episode_start_time = time.time()
         states = env.reset()
+        env.min_power_ratio = max(0.0, env.min_power_ratio - 0.02)  # giảm dần về 0
         current_episode_reward = 0
         last_actor_loss = None
         last_critic_loss = None

@@ -19,6 +19,7 @@ class CommEnvironment:
 
         # Các tham số của Jamming Modulation (JM)
         self.pga_gain = 100  # Hệ số khuếch đại 'a' khi gửi bit '1'
+        self.min_power_ratio = 0.6   # bắt đầu 60% Pmax
 
         self.state_dim = 8 # Kích thước vector trạng thái cho mỗi agent
         self.action_dim = 2 # Kích thước vector hành động cho mỗi agent
@@ -139,7 +140,9 @@ class CommEnvironment:
 
             # Giải mã hành động
             #pga_choice = self.pga_gain if action[0] > 0 else 0  # Gửi bit '1' hay '0'
-            pga_choice = ((action[0] + 1) / 2) * self.pga_gain  # Chuẩn hóa từ [0,1] sang [0, pga_gain]
+            u = (action[0] + 1.0) / 2.0                  # 0..1
+            u = self.min_power_ratio + (1 - self.min_power_ratio) * u
+            pga_choice = u * self.pga_gain                    # [min_ratio*Pmax, Pmax]
             mode_choice = 'relay' if action[1] > 0 else 'd2d'
             
             # Track energy consumption
