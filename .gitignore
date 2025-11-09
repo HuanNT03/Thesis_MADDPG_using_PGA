@@ -1,0 +1,9 @@
+#environment
+.venv/
+
+#Cache 
+__pycache__/
+*.pyc
+
+#Logs and runs
+checkpoints/
