@@ -176,7 +176,7 @@ class CommEnvironment:
                 h1_relay_sq = self._get_channel_gain(jammer_pos, self.rbs)
                 h2_relay_sq = self._get_channel_gain(self.rbs, du_pos)
                 h3_relay_sq = self._get_channel_gain(jammer_pos, du_pos)
-                num2 = h1_relay_sq * h2_relay_sq * (pga_choice**2) * self.jammer_power
+                num2 = h1_relay_sq * h2_relay_sq * (self.pga_gain**2) * self.jammer_power
                 den2 = h3_relay_sq * self.jammer_power + self.noise_power
                 sinr2 = num2 / (den2 + 1e-9)
                 
